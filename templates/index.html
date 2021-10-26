@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td>
+                    <b>{{ total | usd }}</b>
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for c in trans %}
+
+                <tr>
+                    <td>{{ c['symbol'] }}</td>
+                    <td>{{ c['name'] }}</td>
+                    <td>{{ c['shares'] }}</td>
+                    <td>{{ c['price'] | usd }}</td>
+                    <td>{{ (c['shares']*c['price']) | usd }}</td>
+                </tr>
+            {% endfor %}
+
+            <tr>
+                <td colspan="4">CASH</td>
+                <td>{{ money | usd }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
